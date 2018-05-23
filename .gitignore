@@ -1,0 +1,6 @@
+/venv/
+/.vscode/
+debug.log
+geckodriver.log
+settings.txt
+settings2.txt

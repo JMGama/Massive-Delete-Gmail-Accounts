@@ -1,0 +1,10 @@
+[config]
+BROWSER = firefox
+BROWSER_PATH = C:\Users\usuario\AppData\Roaming\Mozilla\Firefox\Profiles\xxxxxxx.default
+USER_NAME = Usuario de prueba
+USER_EMAIL = prueba@prueba.com
+PAGE = https://admin.google.com/prueba.com/AdminHome?pli=1&fral=1
+
+[browsers_path]
+FIREFOX = C:\Users\user\AppData\Local\Mozilla\Firefox\Profiles\xxxxxx.default
+CHROME = C:\Users\user\AppData\Local\Google\Chrome\User Data
