@@ -1,16 +1,15 @@
 import openpyxl as exl
 from user_interface import UserInterface
 
-class ReadExcel:
+class ManageExcel:
 
     def __init__(self):
         """
         Load and open the Excel file with all
         the users and emails.
         """
-
-        self.ui = UserInterface()
-        self.doc = exl.load_workbook(self.ui.select_file())
+        self.file = UserInterface.select_file()
+        self.doc = exl.load_workbook(self.file)
         self.sheet = self.doc.worksheets[0]
         self.rows = self.sheet.rows
         self.current_user = 2
@@ -44,3 +43,7 @@ class ReadExcel:
 
         row_count = self.sheet.max_row
         return row_count-1 # Este -1 es debido a la fila que se ocupa unicamnete para el titulo del archivo (nombre completo, correo institucional)
+
+    def set_unfound_user(self):
+        self.sheet.cell(row=self.current_user, column=3).value = "No se encontro el usuario"
+        self.doc.save(self.file)

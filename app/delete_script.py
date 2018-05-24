@@ -73,9 +73,10 @@ class DeleteScript:
         administrator page, if it appears would click it
         to open his configuration.
         """
-
-        search_bar = self.driver.find_element_by_xpath("//input[@class='gb_9e gb_lf']")
-        search_bar.send_keys(user_email)
+        if WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.XPATH,"//input[@class='gb_9e gb_lf']"))):
+            search_bar = self.driver.find_element_by_xpath("//input[@class='gb_9e gb_lf']")
+            search_bar.clear()
+            search_bar.send_keys(user_email)
         try:
             if WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.XPATH,"//div[@class='ARN6LL-f-a']"))):
                 time.sleep(3)
@@ -145,17 +146,20 @@ class DeleteScript:
             #button_container = container.find_element_by_xpath(".//div[@class='O0WRkf oG5Srb HQ8yf C0oVfc kHssdc HvOprf sPNV2d M9Bg4d']")
             button = container.find_element_by_xpath(".//span[@class='RveJvd snByac' and text()='Eliminar']").click()
 
-    def check_correct_delete(self):
+    def check_correct_delete(self, user_name, user_email):
         """
         Search again the for he user, just to
         confirm if the email was correctly deleted.
         """
 
-        time.sleep(4)
+        time.sleep(6)
         if WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH,"//a[@class='gb_me gb_fc gb_Be' and @id='sdgBod']"))):
             self.driver.find_element_by_xpath("//a[@class='gb_me gb_fc gb_Be' and @id='sdgBod']").click()
             if WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.XPATH,"//div[@class='ARN6LL-v-m']"))):
-                if not self.search_user():
+                if not self.search_user(user_name, user_email):
                     print("usuario borrado exitosamente")
                     return True
             print("error al cargar ")
+
+    def close_driver(self):
+        self.driver.close()

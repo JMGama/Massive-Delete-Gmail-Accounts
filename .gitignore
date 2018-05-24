@@ -4,3 +4,4 @@ debug.log
 geckodriver.log
 settings.txt
 settings2.txt
+__pycache__
